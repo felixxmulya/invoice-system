@@ -41,6 +41,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# credential
-.env
+# environment
 *environment.ts
+*environment.development.ts
