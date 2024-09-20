@@ -1,23 +1,9 @@
 <div class="min-h-screen flex flex-col">
-  <div class="flex flex-1 flex-col sm:flex-row">
-    <app-sidebar class="w-full sm:w-36 sm:flex md:flex-col"></app-sidebar>
+  <div class="flex flex-1 flex-col md:flex-row">
+    <app-sidebar class="w-full md:w-36 md:flex md:flex-col"></app-sidebar>
     <!-- Main Content -->
     <main class="flex-1 p-4">
-      <h2 class="text-xl mb-4">Welcome to the Dashboard</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-white p-4 rounded shadow">
-          <h3 class="text-lg font-semibold mb-2">Card 1</h3>
-          <p>Content for card 1.</p>
-        </div>
-        <div class="bg-white p-4 rounded shadow">
-          <h3 class="text-lg font-semibold mb-2">Card 2</h3>
-          <p>Content for card 2.</p>
-        </div>
-        <div class="bg-white p-4 rounded shadow">
-          <h3 class="text-lg font-semibold mb-2">Card 3</h3>
-          <p>Content for card 3.</p>
-        </div>
-      </div>
+      <app-invoice></app-invoice>
     </main>
   </div>
 </div>

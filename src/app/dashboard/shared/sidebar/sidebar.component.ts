@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Renderer2, OnDestroy, ElementRef, HostListener } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -9,13 +9,20 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
-
-  constructor(@Inject(AuthService) private authService: AuthService) { }
+export class SidebarComponent implements OnDestroy {
 
   showMenu = false;
+  private clickListener: () => void;
+
+  constructor(
+    @Inject(AuthService) private authService: AuthService,
+    private renderer: Renderer2,
+    private el: ElementRef
+  ) {
+    this.clickListener = this.renderer.listen('document', 'click', this.onDocumentClick.bind(this));
+  }
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
@@ -25,4 +32,15 @@ export class SidebarComponent {
     this.authService.logOut();
   }
 
+  onDocumentClick(event: Event) {
+    if (this.showMenu && !this.el.nativeElement.contains(event.target)) {
+      this.showMenu = false;
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.clickListener) {
+      this.clickListener();
+    }
+  }
 }
