@@ -1,4 +1,4 @@
-import { Component, Inject, Renderer2, OnDestroy, ElementRef, HostListener } from '@angular/core';
+import { Component, Inject, Renderer2, OnDestroy, ElementRef } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
