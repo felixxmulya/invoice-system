@@ -1,5 +1,5 @@
-import { inject, Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, onAuthStateChanged } from '@angular/fire/auth';
+import { Injectable } from '@angular/core';
+import { Auth, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -17,18 +17,30 @@ export class AuthService {
         this.errorMessage = null;
       })
       .catch((error) => {
-        if (error.code === 'auth/wrong-password') {
-          this.errorMessage = 'Incorrect password. Please try again.';
-        } else if (error.code === 'auth/user-not-found') {
-          this.errorMessage = 'User not found. Please check your email and try again.';
-        } else {
-          this.errorMessage = 'Incorrect. Please try again.';
-        }
+        this.errorMessage = 'Incorrect. Please try again.';
       })
   }
 
+  loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(this.firebaseAuth, provider)
+      .then(() => {
+        this.router.navigate(['/dashboard']);
+        this.errorMessage = null;
+      })
+      .catch((error) => {
+        this.errorMessage = 'Google sign-in failed. Please try again.';
+      });
+  }
+
   isLoggedIn(): boolean {
-    return !!this.firebaseAuth.currentUser;
+    return !this.firebaseAuth.currentUser;
+  }
+
+  logOut() {
+    this.firebaseAuth.signOut().then(() => {
+      this.router.navigate(['/login']);
+    });
   }
 
   authentication() {

@@ -1,0 +1,14 @@
+<aside class="bg-gray-800 text-white flex flex-row justify-between w-full h-auto py-4 sm:w-36 sm:h-full sm:flex sm:flex-col">
+  <div class="flex justify-center">
+    <img src="https://i.ibb.co/rpGS3rF/spotify-icon.png" alt="Logo" class="w-16 h-16 sm:w-24 sm:h-24">
+  </div>
+
+  <div class="relative mt-auto pt-0 sm:pt-4 sm:border-t-2 ">
+    <div class="flex justify-center items-end p-2">
+      <img src="https://i.ibb.co/rpGS3rF/spotify-icon.png" alt="User Avatar" class="w-12 h-12 rounded-full cursor-pointer hover:bg-gray-700" (click)="toggleMenu()">
+    </div>
+    <ul *ngIf="showMenu" class="absolute top-[-30px] shadow-lg bg-white text-gray-700 text-center z-10 min-w-full  rounded-lg max-h-auto overflow-auto">
+      <li class="py-2"><a href="#" (click)="logout()" >Logout</a></li>
+    </ul>
+  </div>
+</aside>
