@@ -9,14 +9,14 @@ const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
 export const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
-    pathMatch: 'full',
-    canActivate: [AuthGuard],
-    data: { authGuardPipe: redirectLoggedInToDashboard }
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedInToDashboard }
   },
   {
     path: 'dashboard',

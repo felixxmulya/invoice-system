@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { InvoiceHeaderComponent } from "../invoice-header/invoice-header.component";
 import { InvoiceCardComponent } from "../invoice-card/invoice-card.component";
+import { InvoiceModalComponent } from "../invoice-modal/invoice-modal.component";
 
 @Component({
   selector: 'app-invoice',
@@ -9,7 +10,8 @@ import { InvoiceCardComponent } from "../invoice-card/invoice-card.component";
   imports: [
     CommonModule,
     InvoiceHeaderComponent,
-    InvoiceCardComponent
+    InvoiceCardComponent,
+    InvoiceModalComponent
 ],
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss']

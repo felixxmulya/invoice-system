@@ -1,0 +1,29 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-4">Create Invoice</h2>
+  <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label for="clientName" class="block text-sm font-medium text-gray-700">Client Name</label>
+      <input type="text" id="clientName" formControlName="clientName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+    <div class="mb-4">
+      <label for="clientEmail" class="block text-sm font-medium text-gray-700">Client Email</label>
+      <input type="email" id="clientEmail" formControlName="clientEmail" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+    <div class="mb-4">
+      <label for="invoiceDate" class="block text-sm font-medium text-gray-700">Invoice Date</label>
+      <input type="date" id="invoiceDate" formControlName="invoiceDate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+    <div class="mb-4">
+      <label for="dueDate" class="block text-sm font-medium text-gray-700">Due Date</label>
+      <input type="date" id="dueDate" formControlName="dueDate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+    <div class="mb-4">
+      <label for="amount" class="block text-sm font-medium text-gray-700">Amount</label>
+      <input type="number" id="amount" formControlName="amount" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+    </div>
+    <div class="flex justify-end">
+      <button type="button" (click)="onCancel()" class="mr-4 bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+    </div>
+  </form>
+</div>
