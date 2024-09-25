@@ -6,8 +6,20 @@
     </div>
 
     <!-- Modal and Dark Background -->
-    <div class="absolute inset-0 bg-black bg-opacity-50 flex z-50">
-      <div class="bg-white p-6 rounded-r-lg shadow-lg">
+    <div
+      class="absolute inset-0 h-screen bg-black bg-opacity-50"
+      [style.opacity]="showModal ? '1' : '0'"
+      [style.visibility]="showModal ? 'visible' : 'hidden'"
+      [style.transition]="showModal ? 'opacity 0.3s ease, visibility 0.3s ease-in-out' : 'opacity 0.3s ease, visibility 0.3s ease-in-out'"
+      (click)="closeModal($event)"
+    >
+      <div
+        class="bg-white w-full sm:w-[550px] rounded-r-none md:rounded-r-[24px]"
+        [style.transform]="showModal ? 'translateX(0)' : 'translateX(-100%)'"
+        [style.opacity]="showModal ? '1' : '0'"
+        [style.transition]="showModal ? 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out' : 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out'"
+        (click)="$event.stopPropagation()"
+      >
         <app-invoice-modal></app-invoice-modal>
       </div>
     </div>

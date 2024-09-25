@@ -1,5 +1,5 @@
 import { Component, Inject, Renderer2, OnDestroy, ElementRef } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { DashboardService } from '../../services/dashboard.service';
 
 
 @Component({
@@ -15,8 +16,16 @@ export class InvoiceHeaderComponent {
   showFilterMenu = false;
   private clickListener: () => void;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {
+  constructor(
+    private dashboardService: DashboardService,
+    private el: ElementRef,
+    private renderer: Renderer2
+  ) {
     this.clickListener = this.renderer.listen('document', 'click', this.onDocumentClick.bind(this));
+  }
+
+  openModal() {
+    this.dashboardService.openModal();
   }
 
   toggleFilterMenu(event: Event) {
