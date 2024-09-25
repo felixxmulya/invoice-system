@@ -5,10 +5,24 @@
     <div class="mb-12">
       <h3 class="block text-sm font-medium text-gray-700 mb-3">Bill From</h3>
       <div class="mb-4">
+        <label for="name" class="block text-sm font-medium text-gray-500">Name</label>
+        <input type="text" id="name" formControlName="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <span *ngIf="invoiceForm.get('name').invalid && invoiceForm.get('name').touched" class="text-red-400 text-sm font-medium mt-1">
+          Name required.
+        </span>
+      </div>
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-500">Email</label>
+        <input type="text" id="email" formControlName="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <span *ngIf="invoiceForm.get('email').invalid && invoiceForm.get('email').touched" class="text-red-400 text-sm font-medium mt-1">
+          Email required.
+        </span>
+      </div>
+      <div class="mb-4">
         <label for="streetAddress" class="block text-sm font-medium text-gray-500">Street Address</label>
         <input type="text" id="streetAddress" formControlName="streetAddress" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         <span *ngIf="invoiceForm.get('streetAddress').invalid && invoiceForm.get('streetAddress').touched" class="text-red-400 text-sm font-medium mt-1">
-          Street Address is required.
+          Street Address required.
         </span>
       </div>
       <div class="flex mb-4 space-x-4">
@@ -16,14 +30,14 @@
           <label for="city" class="block text-sm font-medium text-gray-500">City</label>
           <input type="text" id="city" formControlName="city" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
           <span *ngIf="invoiceForm.get('city').invalid && invoiceForm.get('city').touched" class="text-red-400 text-sm font-medium mt-1">
-            City is required.
+            City required.
           </span>
         </div>
         <div class="flex-1">
           <label for="postCode" class="block text-sm font-medium text-gray-500">Post Code</label>
           <input type="number" id="postCode" formControlName="postCode" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
           <span *ngIf="invoiceForm.get('postCode').invalid && invoiceForm.get('postCode').touched" class="text-red-400 text-sm font-medium mt-1">
-            Post Code is required.
+            Post Code required.
           </span>
         </div>
       </div>
@@ -36,28 +50,37 @@
         <label for="clientName" class="block text-sm font-medium text-gray-500">Client's Name</label>
         <input type="text" id="clientName" formControlName="clientName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         <span *ngIf="invoiceForm.get('clientName').invalid && invoiceForm.get('clientName').touched" class="text-red-400 text-sm font-medium mt-1">
-          Name is required.
+          Name required.
         </span>
       </div>
       <div class="mb-4">
         <label for="clientEmail" class="block text-sm font-medium text-gray-500">Client's Email</label>
         <input type="text" id="clientEmail" formControlName="clientEmail" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         <span *ngIf="invoiceForm.get('clientEmail').invalid && invoiceForm.get('clientEmail').touched" class="text-red-400 text-sm font-medium mt-1">
-          Email is required.
+          Email required.
         </span>
       </div>
       <div class="mb-4">
         <label for="clientStreetAddress" class="block text-sm font-medium text-gray-500">Street Address</label>
         <input type="text" id="clientStreetAddress" formControlName="clientStreetAddress" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <span *ngIf="invoiceForm.get('clientStreetAddress').invalid && invoiceForm.get('clientStreetAddress').touched" class="text-red-400 text-sm font-medium mt-1">
+          Street Address required.
+        </span>
       </div>
       <div class="flex mb-4 space-x-4">
         <div class="flex-1">
           <label for="clientCity" class="block text-sm font-medium text-gray-500">City</label>
           <input type="text" id="clientCity" formControlName="clientCity" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <span *ngIf="invoiceForm.get('clientCity').invalid && invoiceForm.get('clientCity').touched" class="text-red-400 text-sm font-medium mt-1">
+            City required.
+          </span>
         </div>
         <div class="flex-1">
           <label for="clientPostCode" class="block text-sm font-medium text-gray-500">Post Code</label>
           <input type="number" id="clientPostCode" formControlName="clientPostCode" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <span *ngIf="invoiceForm.get('clientPostCode').invalid && invoiceForm.get('clientPostCode').touched" class="text-red-400 text-sm font-medium mt-1">
+            Post Code required.
+          </span>
         </div>
       </div>
     </div>
@@ -66,15 +89,32 @@
     <div class="mb-8">
       <label for="date" class="block text-sm font-medium text-gray-500">Invoice Date</label>
       <input type="date" id="date" formControlName="date" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      <span *ngIf="invoiceForm.get('date').invalid && invoiceForm.get('date').touched" class="text-red-400 text-sm font-medium mt-1">
+        Date required.
+      </span>
     </div>
 
     <div class="mb-8">
-      <label for="description" class="block text-sm font-medium text-gray-500">Invoice Description</label>
-      <input type="text" id="description" formControlName="description" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      <div class="flex mb-4 space-x-4">
+        <div class="flex-1">
+          <label for="invoiceNumber" class="block text-sm font-medium text-gray-500">Invoice Number</label>
+          <input type="text" id="invoiceNumber" formControlName="invoiceNumber" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <span *ngIf="invoiceForm.get('invoiceNumber').invalid && invoiceForm.get('invoiceNumber').touched" class="text-red-400 text-sm font-medium mt-1">
+            Invoice Number required.
+          </span>
+        </div>
+        <div class="flex-1">
+          <label for="description" class="block text-sm font-medium text-gray-500">Invoice Description</label>
+          <input type="text" id="description" formControlName="description" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <span *ngIf="invoiceForm.get('description').invalid && invoiceForm.get('description').touched" class="text-red-400 text-sm font-medium mt-1">
+            Description required.
+          </span>
+        </div>
+      </div>
     </div>
 
     <!-- Item List Section -->
-    <div class="mb-8">
+    <div class="mb-5">
       <h3 class="block text-xl font-medium text-gray-600 mb-3">Item List</h3>
       <table class="min-w-full mb-6">
         <thead>
@@ -98,12 +138,12 @@
               <input type="number" formControlName="itemPrice" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" (input)="calculateTotal(i)">
             </td>
             <td class="whitespace-nowrap pr-2">
-              <div id="itemTotal" class="mt-1 block w-full px-3 py-2 text-gray-500 font-medium sm:text-sm">
+              <div id="itemTotal" class="mt-1 block w-full px-1 py-2 text-gray-500 font-medium sm:text-sm">
                 {{ item.get('itemTotal')?.value | currency: 'Rp ' }}
               </div>
             </td>
             <td class="whitespace-nowrap text-right text-sm font-medium">
-              <button type="button" class="text-red-500 hover:text-red-700 focus:outline-none" (click)="removeItem(i)">
+              <button type="button" class="text-red-400 hover:text-red-500 focus:outline-none" (click)="removeItem(i)">
                 <i class="fas fa-trash-alt"></i>
               </button>
             </td>
@@ -117,7 +157,10 @@
       </div>
     </div>
 
-    <!-- Form Submission Buttons -->
+    <div class="mb-5">
+      <p class="text-sm text-red-400 font-medium">*All fields are required</p>
+    </div>
+
     <div class="flex justify-between">
       <button type="button" class="bg-red-400 text-white hover:bg-red-600 text-sm font-medium focus:outline-none px-4 py-2 rounded-full">
         Cancel
@@ -126,8 +169,8 @@
         <button type="button" class="bg-gray-500 text-white hover:bg-gray-700 text-sm font-medium focus:outline-none px-4 py-2 rounded-full">
           Draft
         </button>
-        <button type="submit" class="bg-[#7c5dfa] text-white hover:bg-[#5a3dbf] text-sm font-medium focus:outline-none px-4 py-2 rounded-full">
-          Save Changes
+        <button type="submit" [disabled]="invoiceForm.invalid" [ngClass]="{'opacity-60 cursor-not-allowed pointer-events-none': invoiceForm.invalid}" class="bg-[#7c5dfa] text-white hover:bg-[#5a3dbf] text-sm font-medium focus:outline-none px-4 py-2 rounded-full transition-opacity duration-300 ease">
+          Save
         </button>
       </div>
     </div>

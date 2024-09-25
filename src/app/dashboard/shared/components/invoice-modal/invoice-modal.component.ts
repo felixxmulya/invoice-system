@@ -21,12 +21,14 @@ export class InvoiceModalComponent implements OnInit{
 
   invoiceForm: FormGroup | any;
   currentUser$: Observable<any> | undefined;
-form: any;
+  form: any;
 
   constructor(private fb: FormBuilder, private firestore: Firestore, private auth: Auth) {}
 
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       streetAddress: ['', Validators.required],
       city: ['', Validators.required],
       postCode: ['', Validators.required],
@@ -36,6 +38,7 @@ form: any;
       clientCity: ['', Validators.required],
       clientPostCode: ['', Validators.required],
       date: ['', Validators.required],
+      invoiceNumber: ['', Validators.required],
       description: ['', Validators.required],
       items: this.fb.array([this.createItem()])
     });
