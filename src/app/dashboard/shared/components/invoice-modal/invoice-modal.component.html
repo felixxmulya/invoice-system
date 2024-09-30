@@ -86,30 +86,40 @@
     </div>
 
     <!-- Invoice Details Section -->
-    <div class="mb-8">
-      <label for="date" class="block text-sm font-medium text-gray-500">Invoice Date</label>
-      <input type="date" id="date" formControlName="date" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      <span *ngIf="invoiceForm.get('date').invalid && invoiceForm.get('date').touched" class="text-red-400 text-sm font-medium mt-1">
-        Date required.
-      </span>
+    <div class="flex mb-4 space-x-4 mb-8">
+      <div class="flex-1">
+        <label for="date" class="block text-sm font-medium text-gray-500">Invoice Date</label>
+        <input type="date" id="date" formControlName="date" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <span *ngIf="invoiceForm.get('date').invalid && invoiceForm.get('date').touched" class="text-red-400 text-sm font-medium mt-1">
+          Date required.
+        </span>
+      </div>
+      <div class="flex-1">
+        <label for="status" class="block text-sm font-medium text-gray-500">Status</label>
+        <select id="status" formControlName="status" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm cursor-pointer">
+          <option value="Pending">Pending</option>
+          <option value="Paid">Paid</option>
+        </select>
+        <span *ngIf="invoiceForm.get('status').invalid && invoiceForm.get('status').touched" class="text-red-400 text-sm font-medium mt-1">
+          Status required.
+        </span>
+      </div>
     </div>
 
-    <div class="mb-8">
-      <div class="flex mb-4 space-x-4">
-        <div class="flex-1">
-          <label for="invoiceNumber" class="block text-sm font-medium text-gray-500">Invoice Number</label>
-          <input type="text" id="invoiceNumber" formControlName="invoiceNumber" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-          <span *ngIf="invoiceForm.get('invoiceNumber').invalid && invoiceForm.get('invoiceNumber').touched" class="text-red-400 text-sm font-medium mt-1">
-            Invoice Number required.
-          </span>
-        </div>
-        <div class="flex-1">
-          <label for="description" class="block text-sm font-medium text-gray-500">Invoice Description</label>
-          <input type="text" id="description" formControlName="description" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-          <span *ngIf="invoiceForm.get('description').invalid && invoiceForm.get('description').touched" class="text-red-400 text-sm font-medium mt-1">
-            Description required.
-          </span>
-        </div>
+    <div class="flex mb-4 space-x-4 mb-8">
+      <div class="flex-1">
+        <label for="invoiceNumber" class="block text-sm font-medium text-gray-500">Invoice Number</label>
+        <input type="text" id="invoiceNumber" formControlName="invoiceNumber" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <span *ngIf="invoiceForm.get('invoiceNumber').invalid && invoiceForm.get('invoiceNumber').touched" class="text-red-400 text-sm font-medium mt-1">
+          Invoice Number required.
+        </span>
+      </div>
+      <div class="flex-1">
+        <label for="description" class="block text-sm font-medium text-gray-500">Invoice Description</label>
+        <input type="text" id="description" formControlName="description" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <span *ngIf="invoiceForm.get('description').invalid && invoiceForm.get('description').touched" class="text-red-400 text-sm font-medium mt-1">
+          Description required.
+        </span>
       </div>
     </div>
 
@@ -150,6 +160,10 @@
           </tr>
         </tbody>
       </table>
+      <div class="flex justify-between mt-4">
+        <p class="text-lg font-medium text-gray-700">Total Amount:</p>
+        <p class="text-lg font-semibold text-gray-900">{{ getTotalAmount() | currency:'Rp ' }}</p>
+      </div>
       <div class="flex justify-center mt-4">
         <button type="button" class="bg-[#7c5dfa] text-white text-sm font-medium hover:bg-[#5a3dbf] focus:outline-none px-4 py-2 rounded-full w-full" (click)="addItem()">
           <i class="fas fa-plus"></i> Add New Item

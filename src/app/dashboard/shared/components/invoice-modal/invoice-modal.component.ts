@@ -1,29 +1,25 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormArray  } from '@angular/forms';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import { Auth, user } from '@angular/fire/auth';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { InvoiceService } from '../../services/invoice.service';
 
 @Component({
   selector: 'app-invoice-modal',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    CurrencyPipe
-  ],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, CurrencyPipe],
   templateUrl: './invoice-modal.component.html',
-  styleUrl: './invoice-modal.component.scss'
+  styleUrl: './invoice-modal.component.scss',
 })
-export class InvoiceModalComponent implements OnInit{
-
+export class InvoiceModalComponent implements OnInit {
   invoiceForm: FormGroup | any;
   currentUser$: Observable<any> | undefined;
   form: any;
 
-  constructor(private fb: FormBuilder, private firestore: Firestore, private auth: Auth) {}
+  constructor(
+    private fb: FormBuilder,
+    private invoiceService: InvoiceService
+  ) {} // Inject the service
 
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({
@@ -40,10 +36,11 @@ export class InvoiceModalComponent implements OnInit{
       date: ['', Validators.required],
       invoiceNumber: ['', Validators.required],
       description: ['', Validators.required],
-      items: this.fb.array([this.createItem()])
+      status: ['Pending', Validators.required],
+      items: this.fb.array([this.createItem()]),
     });
 
-    this.currentUser$ = user(this.auth);
+    this.currentUser$ = this.invoiceService.getCurrentUser();
   }
 
   // Helper function to create a new item FormGroup
@@ -52,7 +49,7 @@ export class InvoiceModalComponent implements OnInit{
       itemName: ['', Validators.required],
       itemQuantity: [1, Validators.required],
       itemPrice: [Validators.required],
-      itemTotal: [{ value: 0, disabled: true }]
+      itemTotal: [{ value: 0, disabled: true }],
     });
   }
 
@@ -79,33 +76,33 @@ export class InvoiceModalComponent implements OnInit{
     item.get('itemTotal')?.setValue(quantity * price);
   }
 
+  // Calculate the total amount for all items
+  getTotalAmount(): number {
+    return this.items.controls.reduce((total, item) => {
+      const itemTotal = item.get('itemTotal')?.value || 0;
+      return total + itemTotal;
+    }, 0);
+  }
+
   onSubmit() {
     if (this.invoiceForm.valid) {
-      this.currentUser$?.subscribe(user => {
+      this.currentUser$?.subscribe((user) => {
         if (user) {
           const invoiceData = {
             ...this.invoiceForm.value,
+            timestamp: new Date().toISOString(),
             userId: user.uid,
-            userName: user.displayName || 'Anonymous', // Include user's display name
-            userEmail: user.email // Include user's email
+            userName: user.displayName || 'Anonymous',
+            userEmail: user.email,
+            totalAmount: this.getTotalAmount()
           };
-          this.saveInvoiceToFirestore(invoiceData);
+          this.invoiceService.saveInvoice(invoiceData);
         } else {
           console.log('User not authenticated');
         }
       });
     } else {
       console.log('Form is invalid');
-    }
-  }
-
-  async saveInvoiceToFirestore(invoiceData: any) {
-    try {
-      const invoicesCollection = collection(this.firestore, `users/${invoiceData.userEmail}/invoices`);
-      await addDoc(invoicesCollection, invoiceData);
-      console.log('Invoice saved successfully!');
-    } catch (error) {
-      console.error('Error saving invoice: ', error);
     }
   }
 }
