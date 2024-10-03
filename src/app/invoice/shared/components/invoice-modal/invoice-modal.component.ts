@@ -1,6 +1,13 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormArray } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  FormsModule,
+  FormArray,
+} from '@angular/forms';
 import { Observable } from 'rxjs';
 import { InvoiceService } from '../../services/invoice.service';
 
@@ -94,7 +101,7 @@ export class InvoiceModalComponent implements OnInit {
             userId: user.uid,
             userName: user.displayName || 'Anonymous',
             userEmail: user.email,
-            totalAmount: this.getTotalAmount()
+            totalAmount: this.getTotalAmount(),
           };
           this.invoiceService.saveInvoice(invoiceData);
         } else {

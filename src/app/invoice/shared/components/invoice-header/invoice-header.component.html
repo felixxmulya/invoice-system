@@ -1,7 +1,7 @@
 <div class="flex justify-between items-center mb-6">
   <div>
     <h1 class="text-3xl font-bold">Invoices</h1>
-    <p class="text-gray-500">There are 4 total invoices</p>
+    <p class="text-gray-500">There are {{ invoiceCount }} total invoices</p>
   </div>
   <div class="flex items-center">
     <div class="relative px-4">
@@ -11,20 +11,14 @@
       </button>
       <ul *ngIf="showFilterMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden">
         <li class="py-2 px-2 flex items-center">
-          <label for="draft" class="flex items-center cursor-pointer w-full">
-            <input type="checkbox" id="draft" class="mr-2 cursor-pointer accent-pink-500 w-4 h-4">
-            Draft
-          </label>
-        </li>
-        <li class="py-2 px-2 flex items-center">
           <label for="paid" class="flex items-center cursor-pointer w-full">
-            <input type="checkbox" id="paid" class="mr-2 cursor-pointer accent-pink-500 w-4 h-4">
+            <input type="checkbox" id="paid" class="mr-2 cursor-pointer accent-pink-500 w-4 h-4" (change)="toggleFilter('Paid')" [checked]="selectedFilters.has('Paid')">
             Paid
           </label>
         </li>
         <li class="py-2 px-2 flex items-center">
           <label for="pending" class="flex items-center cursor-pointer w-full">
-            <input type="checkbox" id="pending" class="mr-2 cursor-pointer accent-pink-500 w-4 h-4">
+            <input type="checkbox" id="pending" class="mr-2 cursor-pointer accent-pink-500 w-4 h-4" (change)="toggleFilter('Pending')" [checked]="selectedFilters.has('Pending')">
             Pending
           </label>
         </li>

@@ -1,0 +1,25 @@
+<div class="grid grid-cols-none sm:grid-cols-2 gap-2">
+  <a href="#" *ngFor="let invoice of invoices" class="flex flex-row justify-between items-start sm:items-center p-6 border-2 border-gray-300 rounded-lg bg-white shadow-md hover:border-purple-700">
+    <div class="flex-2 space-y-1 justify-center">
+      <p class="text-md font-bold text-gray-700">#{{ invoice.invoiceNumber }}</p>
+      <p class="text-md font-medium text-gray-500">{{ invoice.date | date:'dd MMM yyyy' }}</p>
+      <p class="text-lg font-semibold text-gray-700">{{ invoice.totalAmount | currency:'Rp ' }}</p>
+    </div>
+    <div class="flex-1 sm:items-end text-right space-y-1 justify-center">
+      <p class="text-md font-medium text-gray-500">{{ invoice.description }}</p>
+      <p class="text-md font-medium text-gray-500">{{ invoice.clientName }}</p>
+      <p class="inline-flex items-center px-2 py-1 rounded text-sm font-medium" [ngClass]="{
+        'bg-green-100 text-green-700': invoice.status === 'Paid',
+        'bg-yellow-100 text-yellow-700': invoice.status === 'Pending',
+        'bg-gray-100 text-gray-700': invoice.status === 'Draft'
+      }">
+        <span class="inline-block w-2 h-2 mr-2 rounded-full" [ngClass]="{
+          'bg-green-700': invoice.status === 'Paid',
+          'bg-yellow-500': invoice.status === 'Pending',
+          'bg-gray-500': invoice.status === 'Draft'
+        }"></span>
+        {{ invoice.status }}
+      </p>
+    </div>
+  </a>
+</div>

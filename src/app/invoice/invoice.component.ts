@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { InvoiceHeaderComponent } from "../invoice-header/invoice-header.component";
-import { InvoiceCardComponent } from "../invoice-card/invoice-card.component";
-import { InvoiceModalComponent } from "../invoice-modal/invoice-modal.component";
+import { InvoiceHeaderComponent } from './shared/components/invoice-header/invoice-header.component';
+import { InvoiceCardComponent } from './shared/components/invoice-card/invoice-card.component';
+import { InvoiceModalComponent } from './shared/components/invoice-modal/invoice-modal.component';
 
 @Component({
   selector: 'app-invoice',
