@@ -1,17 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { InvoiceHeaderComponent } from './shared/components/invoice-header/invoice-header.component';
-import { InvoiceCardComponent } from './shared/components/invoice-card/invoice-card.component';
-import { InvoiceModalComponent } from './shared/components/invoice-modal/invoice-modal.component';
+import { SidebarComponent } from "../dashboard/shared/components/sidebar/sidebar.component";
+import { InvoiceViewComponent } from "./shared/components/invoice-view/invoice-view.component";
 
 @Component({
   selector: 'app-invoice',
   standalone: true,
   imports: [
     CommonModule,
-    InvoiceHeaderComponent,
-    InvoiceCardComponent,
-    InvoiceModalComponent
+    SidebarComponent,
+    InvoiceViewComponent
 ],
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss']

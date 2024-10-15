@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Auth, user } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +52,10 @@ export class InvoiceService {
       const filteredInvoices = this.invoicesSubject.value.filter(invoice => filters.includes(invoice.status));
       this.filteredInvoicesSubject.next(filteredInvoices);
     }
+  }
+
+  getInvoiceById(userEmail: string, invoiceId: string): Observable<any> {
+    const invoiceDoc = doc(this.firestore, `users/${userEmail}/invoices/${invoiceId}`);
+    return docData(invoiceDoc);
   }
 }

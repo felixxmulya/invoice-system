@@ -1,4 +1,4 @@
-<div class="p-8 max-h-screen overflow-y-auto scrollbar">
+<div class="p-6 max-h-screen overflow-y-auto scrollbar">
   <h2 class="text-2xl font-bold mb-8">New Invoice</h2>
   <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
     <!-- Bill From Section -->
@@ -129,6 +129,7 @@
       <table class="min-w-full mb-6">
         <thead>
           <tr>
+            <th scope="col" class="text-left text-sm font-medium text-gray-500 tracking-wider pr-2">No</th>
             <th scope="col" class="text-left text-sm font-medium text-gray-500 tracking-wider">Item Name</th>
             <th scope="col" class="text-left text-sm font-medium text-gray-500 tracking-wider">Qty</th>
             <th scope="col" class="text-left text-sm font-medium text-gray-500 tracking-wider">Price</th>
@@ -138,6 +139,11 @@
         </thead>
         <tbody formArrayName="items">
           <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+            <td class="whitespace-nowrap pr-2">
+              <div class="mt-1 block w-full px-1 py-2 text-gray-500 font-medium sm:text-sm">
+                {{ item.get('orderNumber')?.value }}
+              </div>
+            </td>
             <td class="whitespace-nowrap pr-2">
               <input type="text" formControlName="itemName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </td>

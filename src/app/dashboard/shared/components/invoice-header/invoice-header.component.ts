@@ -6,8 +6,8 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { DashboardService } from '../../../../dashboard/shared/services/dashboard.service';
-import { InvoiceService } from '../../services/invoice.service';
+import { DashboardService } from '../../services/dashboard.service';
+import { InvoiceService } from '../../../../invoice/shared/services/invoice.service';
 import { Subscription } from 'rxjs';
 
 @Component({

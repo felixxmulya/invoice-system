@@ -1,2 +1,8 @@
-<app-invoice-header></app-invoice-header>
-<app-invoice-card ></app-invoice-card>
+<div class="min-h-screen flex flex-col md:flex-row">
+  <app-sidebar></app-sidebar>
+  <div class="flex-1 relative">
+    <div class="container mx-auto max-w-[900px] p-2 md:p-6">
+      <app-invoice-view></app-invoice-view>
+    </div>
+  </div>
+</div>

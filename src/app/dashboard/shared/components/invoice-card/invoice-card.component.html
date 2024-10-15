@@ -1,5 +1,5 @@
 <div class="grid grid-cols-none sm:grid-cols-2 gap-2">
-  <a href="#" *ngFor="let invoice of invoices" class="flex flex-row justify-between items-start sm:items-center p-6 border-2 border-gray-300 rounded-lg bg-white shadow-md hover:border-purple-700">
+  <a [routerLink]="['/invoice', invoice.id]" *ngFor="let invoice of invoices" class="flex flex-row justify-between items-start sm:items-center p-6 border-2 border-gray-300 rounded-lg bg-white shadow-md hover:border-purple-700">
     <div class="flex-2 space-y-1 justify-center">
       <p class="text-md font-bold text-gray-700">#{{ invoice.invoiceNumber }}</p>
       <p class="text-md font-medium text-gray-500">{{ invoice.date | date:'dd MMM yyyy' }}</p>

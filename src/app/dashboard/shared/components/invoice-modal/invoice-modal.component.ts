@@ -9,7 +9,7 @@ import {
   FormArray,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { InvoiceService } from '../../services/invoice.service';
+import { InvoiceService } from '../../../../invoice/shared/services/invoice.service';
 
 @Component({
   selector: 'app-invoice-modal',
@@ -44,15 +44,16 @@ export class InvoiceModalComponent implements OnInit {
       invoiceNumber: ['', Validators.required],
       description: ['', Validators.required],
       status: ['Pending', Validators.required],
-      items: this.fb.array([this.createItem()]),
+      items: this.fb.array([this.createItem(1)]),
     });
 
     this.currentUser$ = this.invoiceService.getCurrentUser();
   }
 
   // Helper function to create a new item FormGroup
-  createItem(): FormGroup {
+  createItem(orderNumber: number): FormGroup {
     return this.fb.group({
+      orderNumber: [orderNumber, Validators.required],
       itemName: ['', Validators.required],
       itemQuantity: [1, Validators.required],
       itemPrice: [Validators.required],
@@ -67,12 +68,17 @@ export class InvoiceModalComponent implements OnInit {
 
   // Method to add a new item
   addItem() {
-    this.items.push(this.createItem());
+    const orderNumber = this.items.length + 1;
+    this.items.push(this.createItem(orderNumber));
   }
 
   // Method to remove an item
   removeItem(index: number) {
     this.items.removeAt(index);
+    // Update order numbers after removal
+    this.items.controls.forEach((item, i) => {
+      item.get('orderNumber')?.setValue(i + 1);
+    });
   }
 
   // Calculate the total for an item when quantity or price changes

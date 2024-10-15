@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InvoiceService } from '../../services/invoice.service';
+import { InvoiceService } from '../../../../invoice/shared/services/invoice.service';
 import { Auth, user } from '@angular/fire/auth';
 import { Observable, switchMap } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './invoice-card.component.html',
   styleUrl: './invoice-card.component.scss',
 })

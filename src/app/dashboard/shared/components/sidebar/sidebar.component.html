@@ -1,11 +1,11 @@
 <aside class="bg-[#373b53] text-white flex flex-row justify-between w-full h-auto py-2 p-5 md:py-4 md:p-0 md:w-28 md:h-full md:flex md:flex-col md:rounded-r-[24px]">
   <div class="flex justify-center">
-    <img src="https://i.ibb.co/rpGS3rF/spotify-icon.png" alt="Logo" class="w-14 h-14 md:w-20 md:h-20">
+    <i class="fa-regular fa-file-lines fa-3x"></i>
   </div>
 
   <div class="relative mt-auto pt-0 md:pt-4 md:border-t-2">
     <div class="flex justify-center items-end p-2">
-      <img src="https://i.ibb.co/rpGS3rF/spotify-icon.png" alt="User Avatar" class="w-10 h-10 rounded-full cursor-pointer hover:bg-gray-700" (click)="toggleMenu()">
+      <i class="fas fa-user-circle fa-2x cursor-pointer" (click)="toggleMenu()"></i>
     </div>
     <ul *ngIf="showMenu" class="absolute top-[55px] md:top-[-80px] right-0 mt-2 w-44 md:w-full bg-white text-gray-700 rounded-md shadow-xl z-10 text-center">
       <li class="py-2 px-4 hover:bg-[#373b53] hover:text-white w-full">

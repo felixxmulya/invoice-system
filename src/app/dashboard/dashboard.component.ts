@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { InvoiceComponent } from '../invoice/invoice.component';
-import { InvoiceModalComponent } from '../invoice/shared/components/invoice-modal/invoice-modal.component';
+import { InvoiceModalComponent } from './shared/components/invoice-modal/invoice-modal.component';
 import { DashboardService } from './shared/services/dashboard.service';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { InvoiceHeaderComponent } from "./shared/components/invoice-header/invoice-header.component";
+import { InvoiceCardComponent } from "./shared/components/invoice-card/invoice-card.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -12,8 +14,9 @@ import { Subscription } from 'rxjs';
   imports: [
     CommonModule,
     SidebarComponent,
-    InvoiceComponent,
-    InvoiceModalComponent
+    InvoiceModalComponent,
+    InvoiceHeaderComponent,
+    InvoiceCardComponent
 ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],

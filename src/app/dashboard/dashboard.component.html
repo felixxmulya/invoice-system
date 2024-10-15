@@ -1,8 +1,10 @@
 <div class="min-h-screen flex flex-col md:flex-row">
   <app-sidebar></app-sidebar>
   <div class="flex-1 relative">
+
     <div class="container mx-auto max-w-[900px] p-2 md:p-6">
-      <app-invoice></app-invoice>
+      <app-invoice-header></app-invoice-header>
+      <app-invoice-card ></app-invoice-card>
     </div>
 
     <!-- Modal and Dark Background -->
@@ -14,7 +16,7 @@
       (click)="closeModal($event)"
     >
       <div
-        class="bg-white w-full sm:w-[550px] rounded-r-none md:rounded-r-[24px]"
+        class="bg-white w-full sm:w-[700px] rounded-r-none md:rounded-r-[24px]"
         [style.transform]="showModal ? 'translateX(0)' : 'translateX(-100%)'"
         [style.opacity]="showModal ? '1' : '0'"
         [style.transition]="showModal ? 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out' : 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out'"
