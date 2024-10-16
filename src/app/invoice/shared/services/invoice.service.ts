@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, docData, setDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, query, orderBy, doc, docData, setDoc, deleteDoc } from '@angular/fire/firestore';
 import { Auth, user } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -38,7 +38,8 @@ export class InvoiceService {
 
   invoiceStorage(userEmail: string): void {
     const invoicesCollection = collection(this.firestore, `users/${userEmail}/invoices`);
-    collectionData(invoicesCollection, { idField: 'id' }).subscribe((invoices: any[]) => {
+    const invoicesQuery = query(invoicesCollection, orderBy('timestamp', 'desc'));
+    collectionData(invoicesQuery, { idField: 'id' }).subscribe((invoices: any[]) => {
       this.invoicesSubject.next(invoices);
       this.applyFilters(this.filters);
     });

@@ -11,7 +11,7 @@ import { InvoiceService } from '../../services/invoice.service';
   styleUrl: './invoice-view.component.scss'
 })
 export class InvoiceViewComponent implements OnInit {
-  invoice: any;
+  invoice: any = {};
   userEmail: any | undefined;
 
   constructor(

@@ -1,5 +1,10 @@
-<div class="p-6 max-h-screen overflow-y-auto scrollbar">
-  <h2 class="text-2xl font-bold mb-8">New Invoice</h2>
+<div class="p-6 h-full md:max-h-screen overflow-y-auto scrollbar">
+  <div class="flex justify-between mb-8">
+    <h2 class="text-2xl font-bold ">New Invoice</h2>
+    <button (click)="closeModal($event)" class="bg-[#373b53] hover:bg-[#4a4e69] text-white font-semibold px-3 py-2 md:px-4 rounded-full flex items-center text-center block sm:hidden">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
   <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
     <!-- Bill From Section -->
     <div class="mb-12">

@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { InvoiceService } from '../../../../invoice/shared/services/invoice.service';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-invoice-modal',
@@ -25,8 +26,13 @@ export class InvoiceModalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private invoiceService: InvoiceService
-  ) {} // Inject the service
+    private invoiceService: InvoiceService,
+    private dashboardService: DashboardService
+  ) {}
+
+  closeModal(event: Event) {
+    this.dashboardService.closeModal();
+  }
 
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({
@@ -92,8 +98,9 @@ export class InvoiceModalComponent implements OnInit {
   // Calculate the total amount for all items
   getTotalAmount(): number {
     return this.items.controls.reduce((total, item) => {
-      const itemTotal = item.get('itemTotal')?.value || 0;
-      return total + itemTotal;
+      const quantity = item.get('itemQuantity')?.value || 0;
+      const price = item.get('itemPrice')?.value || 0;
+      return total + (quantity * price);
     }, 0);
   }
 
@@ -102,7 +109,11 @@ export class InvoiceModalComponent implements OnInit {
       this.currentUser$?.subscribe((user) => {
         if (user) {
           const invoiceData = {
-            ...this.invoiceForm.value,
+            ...this.invoiceForm.getRawValue(),
+            items: this.invoiceForm.get('items').value.map((item: any) => ({
+              ...item,
+              itemTotal: item.itemQuantity * item.itemPrice
+            })),
             timestamp: new Date().toISOString(),
             userId: user.uid,
             userName: user.displayName || 'Anonymous',

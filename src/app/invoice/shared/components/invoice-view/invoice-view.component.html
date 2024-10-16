@@ -4,7 +4,21 @@
 </button>
 <div class="bg-white shadow-lg rounded-lg p-6 mb-4">
   <div class="flex justify-between items-center">
-    <p class="font-medium">Status: {{ invoice.status }}</p>
+    <p class="font-medium inline-flex items-center px-2 py-1 rounded text-sm">
+      Status:
+      <span class="inline-flex items-center ml-2 px-2 py-1 rounded" [ngClass]="{
+            'bg-green-100 text-green-700': invoice?.status === 'Paid',
+            'bg-yellow-100 text-yellow-700': invoice?.status === 'Pending',
+            'bg-gray-100 text-gray-700': invoice?.status === 'Draft'
+          }">
+        <span class="inline-block w-2 h-2 mr-2 rounded-full" [ngClass]="{
+              'bg-green-700': invoice?.status === 'Paid',
+              'bg-yellow-500': invoice?.status === 'Pending',
+              'bg-gray-500': invoice?.status === 'Draft'
+            }"></span>
+        {{ invoice.status }}
+      </span>
+    </p>
     <div class="space-x-4">
       <button class="text-500 hover:text-600">
         <i class="fas fa-edit"></i>
@@ -61,8 +75,8 @@
           <td class="py-2 border border-gray-300 text-center">{{ i + 1 }}</td>
           <td class="py-2 border border-gray-300 text-center">{{ item.itemQuantity }}</td>
           <td class="py-2 border border-gray-300 text-center">{{ item.itemName }}</td>
-          <td class="py-2 border border-gray-300 text-center">{{ item.itemTotal | currency:'Rp ' }}</td>
           <td class="py-2 border border-gray-300 text-center">{{ item.itemPrice | currency:'Rp ' }}</td>
+          <td class="py-2 border border-gray-300 text-center">{{ item.itemTotal | currency:'Rp ' }}</td>
         </tr>
       </tbody>
     </table>
