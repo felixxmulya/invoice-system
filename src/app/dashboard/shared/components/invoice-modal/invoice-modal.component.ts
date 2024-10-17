@@ -21,7 +21,7 @@ import { DashboardService } from '../../services/dashboard.service';
 })
 export class InvoiceModalComponent implements OnInit {
   invoiceForm: FormGroup | any;
-  currentUser$: Observable<any> | undefined;
+  currentUser: Observable<any> | undefined;
   form: any;
 
   constructor(
@@ -53,7 +53,7 @@ export class InvoiceModalComponent implements OnInit {
       items: this.fb.array([this.createItem(1)]),
     });
 
-    this.currentUser$ = this.invoiceService.getCurrentUser();
+    this.currentUser = this.invoiceService.getCurrentUser();
   }
 
   // Helper function to create a new item FormGroup
@@ -106,7 +106,7 @@ export class InvoiceModalComponent implements OnInit {
 
   onSubmit() {
     if (this.invoiceForm.valid) {
-      this.currentUser$?.subscribe((user) => {
+      this.currentUser?.subscribe((user) => {
         if (user) {
           const invoiceData = {
             ...this.invoiceForm.getRawValue(),

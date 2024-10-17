@@ -39,7 +39,7 @@ export class InvoiceHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.invoiceService.filteredInvoices$.subscribe((invoices) => {
+      this.invoiceService.filteredInvoices.subscribe((invoices) => {
         this.invoiceCount = invoices.length;
       })
     );

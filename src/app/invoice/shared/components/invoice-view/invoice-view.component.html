@@ -20,10 +20,10 @@
       </span>
     </p>
     <div class="space-x-4">
-      <button class="text-500 hover:text-600">
+      <button class="text-500 hover:text-600" (click)="toggleEditMode()">
         <i class="fas fa-edit"></i>
       </button>
-      <button class="text-red-500 hover:text-red-600">
+      <button class="text-red-500 hover:text-red-600" (click)="deleteInvoice()">
         <i class="fas fa-trash-alt"></i>
       </button>
     </div>
@@ -33,11 +33,27 @@
   <div class="flex items-center space-x-4 md:space-x-9 mb-6">
     <i class="fa-solid fa-user-circle fa-5x"></i>
     <div>
-      <h1 class="text-2xl font-bold">{{ invoice.clientName }}</h1>
-      <p class="text-gray-600">{{ invoice.clientStreetAddress }}</p>
-      <p class="text-gray-600">{{ invoice.clientCity }}</p>
-      <p class="text-gray-600">{{ invoice.clientPostCode }}</p>
-      <p class="text-gray-600">Email: {{ invoice.clientEmail }}</p>
+      <h1 class="text-2xl font-bold">
+        <span *ngIf="!isEditing">{{ invoice.clientName }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.clientName" class="border rounded" />
+      </h1>
+      <p class="text-gray-600">
+        <span *ngIf="!isEditing">{{ invoice.clientStreetAddress }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.clientStreetAddress" class="border rounded" />
+      </p>
+      <p class="text-gray-600">
+        <span *ngIf="!isEditing">{{ invoice.clientCity }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.clientCity" class="border rounded" />
+      </p>
+      <p class="text-gray-600">
+        <span *ngIf="!isEditing">{{ invoice.clientPostCode }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.clientPostCode" class="border rounded" />
+      </p>
+      <p class="text-gray-600">
+        Email:
+        <span *ngIf="!isEditing">{{ invoice.clientEmail }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.clientEmail" class="border rounded" />
+      </p>
     </div>
   </div>
 
@@ -46,15 +62,39 @@
   <div class="flex justify-between mb-8">
     <div>
       <h3 class="text-lg font-semibold">Kepada Yth.</h3>
-      <p class="text-gray-600">{{ invoice.name }}</p>
-      <p class="text-gray-600">{{ invoice.streetAddress }}</p>
-      <p class="text-gray-600">{{ invoice.city }}</p>
-      <p class="text-gray-600">{{ invoice.postCode }}</p>
+      <p class="text-gray-600">
+        <span *ngIf="!isEditing">{{ invoice.name }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.name" class="border rounded" />
+      </p>
+      <p class="text-gray-600">
+        <span *ngIf="!isEditing">{{ invoice.streetAddress }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.streetAddress" class="border rounded" />
+      </p>
+      <p class="text-gray-600">
+        <span *ngIf="!isEditing">{{ invoice.city }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.city" class="border rounded" />
+      </p>
+      <p class="text-gray-600">
+        <span *ngIf="!isEditing">{{ invoice.postCode }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.postCode" class="border rounded" />
+      </p>
     </div>
-    <div class="text-right flex flex-col items-end">
-      <p class="text-gray-600">Date: {{ invoice.date | date:'dd/MM/yyyy' }}</p>
-      <p class="text-gray-600">Invoice No: {{ invoice.invoiceNumber }}</p>
-      <p class="text-gray-600">PO No: {{ invoice.description }}</p>
+    <div>
+      <p class="text-gray-600">
+        Date:
+        <span *ngIf="!isEditing">{{ invoice.date | date:'dd/MM/yyyy' }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.date" class="border rounded" type="date" />
+      </p>
+      <p class="text-gray-600">
+        Invoice No:
+        <span *ngIf="!isEditing">{{ invoice.invoiceNumber }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.invoiceNumber" class="border rounded" />
+      </p>
+      <p class="text-gray-600">
+        PO No:
+        <span *ngIf="!isEditing">{{ invoice.description }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="invoice.description" class="border rounded" />
+      </p>
     </div>
   </div>
 
@@ -73,10 +113,22 @@
       <tbody>
         <tr *ngFor="let item of invoice.items; let i = index">
           <td class="py-2 border border-gray-300 text-center">{{ i + 1 }}</td>
-          <td class="py-2 border border-gray-300 text-center">{{ item.itemQuantity }}</td>
-          <td class="py-2 border border-gray-300 text-center">{{ item.itemName }}</td>
-          <td class="py-2 border border-gray-300 text-center">{{ item.itemPrice | currency:'Rp ' }}</td>
-          <td class="py-2 border border-gray-300 text-center">{{ item.itemTotal | currency:'Rp ' }}</td>
+          <td class="py-2 border border-gray-300 text-center">
+            <span *ngIf="!isEditing">{{ item.itemQuantity }}</span>
+            <input *ngIf="isEditing" [(ngModel)]="item.itemQuantity" class="border rounded" />
+          </td>
+          <td class="py-2 border border-gray-300 text-center">
+            <span *ngIf="!isEditing">{{ item.itemName }}</span>
+            <input *ngIf="isEditing" [(ngModel)]="item.itemName" class="border rounded" />
+          </td>
+          <td class="py-2 border border-gray-300 text-center">
+            <span *ngIf="!isEditing">{{ item.itemPrice | currency:'Rp ' }}</span>
+            <input *ngIf="isEditing" [(ngModel)]="item.itemPrice" class="border rounded" />
+          </td>
+          <td class="py-2 border border-gray-300 text-center">
+            <span *ngIf="!isEditing">{{ item.itemTotal | currency:'Rp ' }}</span>
+            <input *ngIf="isEditing" [(ngModel)]="item.itemTotal" class="border rounded" />
+          </td>
         </tr>
       </tbody>
     </table>
@@ -95,5 +147,10 @@
       Barang yang dibeli tidak dapat ditukar/kembali. Pembayaran dianggap lunas setelah masuk rekening kami.
     </p>
     <p class="text-center font-semibold">Hormat Kami</p>
+  </div>
+
+  <div *ngIf="isEditing" class="flex justify-end">
+    <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="saveInvoice()">Save</button>
+    <button class="bg-gray-500 text-white px-4 py-2 rounded ml-2" (click)="toggleEditMode()">Cancel</button>
   </div>
 </div>

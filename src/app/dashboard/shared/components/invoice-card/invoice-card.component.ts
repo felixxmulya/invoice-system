@@ -14,22 +14,24 @@ import { RouterModule } from '@angular/router';
 })
 export class InvoiceCardComponent implements OnInit {
   invoices: any[] = [];
-  currentUser$: Observable<any> | undefined;
+  currentUser: Observable<any> | undefined;
 
   constructor(private invoiceService: InvoiceService, private auth: Auth) {}
 
   ngOnInit(): void {
-    this.currentUser$ = user(this.auth);
+    this.currentUser = user(this.auth);
 
-    this.currentUser$
-      ?.pipe(
-        switchMap((user) => {
-          this.invoiceService.invoiceStorage(user.email);
-          return this.invoiceService.filteredInvoices$;
-        })
-      )
-      .subscribe((invoices) => {
-        this.invoices = invoices;
-      });
+    if (this.currentUser) {
+      this.currentUser
+        .pipe(
+          switchMap((user) => {
+            this.invoiceService.invoiceStorage(user.email);
+            return this.invoiceService.filteredInvoices;
+          })
+        )
+        .subscribe((invoices) => {
+          this.invoices = invoices;
+        });
+    }
   }
 }
