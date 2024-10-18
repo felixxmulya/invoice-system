@@ -1,14 +1,10 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 export const environment = {
-    production: true,
     firebaseConfig: {
-      apiKey: process.env['FIREBASE_API_KEY'],
-      authDomain: process.env['FIREBASE_AUTH_DOMAIN'],
-      projectId: process.env['FIREBASE_PROJECT_ID'],
-      storageBucket: process.env['FIREBASE_STORAGE_BUCKET'],
-      messagingSenderId: process.env['FIREBASE_MESSAGING_SENDER_ID'],
-      appId: process.env['FIREBASE_APP_ID']
+      apiKey: "AIzaSyC1vchNhLq1lFSoTxtMVXMIvFVXz0CJRvY",
+      authDomain: "invoice-management-5d52a.firebaseapp.com",
+      projectId: "invoice-management-5d52a",
+      storageBucket: "invoice-management-5d52a.appspot.com",
+      messagingSenderId: "705295835892",
+      appId: "1:705295835892:web:4da5ad6ae973a859e2f4a1"
     }
 };
