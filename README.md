@@ -1,27 +1,37 @@
-# InvoiceSystem
+# Invoice Management App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2.
+This is a simple Invoice Management System built with **Angular** and **Firebase**. It allows users to manage invoices by creating, editing, and viewing them. The app uses Firebase for authentication and real-time database management.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- User authentication (Firebase Authentication)
+- Create, edit, and view invoices
+- Manage user profiles and data
+- Dynamic form handling for adding items to the invoice
+- Firebase Firestore for real-time data storage
+- Responsive design using Angular and TailwindCSS
 
-## Code scaffolding
+## Technologies Used
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Angular**: Frontend framework
+- **Firebase**: Backend services for authentication, database (Firestore), and hosting
+- **Tailwind CSS**: For responsive and clean UI
+- **TypeScript**: Ensuring type safety
 
-## Build
+## Getting Started
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To get a local copy up and running, follow these steps:
 
-## Running unit tests
+### Prerequisites
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- [Node.js](https://nodejs.org/en/) (version 14 or later)
+- [Firebase CLI](https://firebase.google.com/docs/cli)
+- [Angular CLI](https://angular.io/guide/setup-local) (version 12 or later)
 
-## Running end-to-end tests
+### Installation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. **Clone the repository:**
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+   ```bash
+   git clone https://github.com/yourusername/invoice-app.git
+   cd invoice-app
