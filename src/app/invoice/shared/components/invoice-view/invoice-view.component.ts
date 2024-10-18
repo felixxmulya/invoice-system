@@ -4,6 +4,8 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { InvoiceService } from '../../services/invoice.service';
 import { filter } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-invoice-view',
@@ -45,6 +47,7 @@ export class InvoiceViewComponent implements OnInit {
           invoice => {
             if (invoice) {
               this.invoice = invoice;
+              this.calculateTotalAmount();
             } else if (!this.isDeleted) {
               this.router.navigate(['/dashboard']);
             }
@@ -96,5 +99,45 @@ export class InvoiceViewComponent implements OnInit {
         alert('Failed to save invoice');
       }
     );
+  }
+
+  addItem(): void {
+    const newItem = {
+      itemQuantity: 1,
+      itemName: '',
+      itemPrice: 0,
+      itemTotal: 0
+    };
+    this.invoice.items.push(newItem);
+    this.calculateTotalAmount();
+  }
+
+  removeItem(index: number): void {
+    this.invoice.items.splice(index, 1);
+    this.calculateTotalAmount();
+  }
+
+  calculateTotalAmount(): void {
+    this.invoice.items.forEach((item: any) => {
+      item.itemTotal = item.itemQuantity * item.itemPrice;
+    });
+    this.invoice.totalAmount = this.invoice.items.reduce((total: number, item: any) => {
+      return total + item.itemTotal;
+    }, 0);
+  }
+
+  generatePDF(): void {
+    const data = document.getElementById('invoice-content');
+    if (data) {
+      html2canvas(data).then(canvas => {
+        const imgWidth = 208;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        const contentDataURL = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const position = 0;
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+        pdf.save('invoice.pdf');
+      });
+    }
   }
 }
